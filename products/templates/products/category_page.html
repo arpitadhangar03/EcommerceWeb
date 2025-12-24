@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-4">
+  <h2 class="mb-4">{{ category|title }} Products</h2>
+  <div class="row">
+    {% for code, label in subcategories %}
+      <div class="col-md-4 mb-4">
+        <a href="{% url 'subcategory_page' category code %}" class="card shadow-sm text-decoration-none">
+          <img src="{% static 'products/images/' %}{{ code }}.jpg" 
+               class="card-img-top" 
+               alt="{{ label }}">
+          <div class="card-body text-center">
+            <h5 class="card-title text-dark">{{ label }}</h5>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

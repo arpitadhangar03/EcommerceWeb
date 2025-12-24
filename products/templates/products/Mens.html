@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="men-category">
+    <h1>Men's Fashion</h1>
+    <p>Explore premium styles curated for you</p>
+
+    <div class="subcategory-container">
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='men' subcategory='tshirts' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/10/4e/11/104e114c617ec04d31d653c16c928194.jpg" alt="Tshirts">
+                </div>
+                <h3>Tshirts</h3>
+            </a>
+        </div>
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='men' subcategory='shirts' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/c6/54/43/c6544394bb6c1515e2ee758be2972331.jpg" alt="Shirts">
+                </div>
+                <h3>Shirts</h3>
+            </a>
+        </div>
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='men' subcategory='bottom' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/1200x/d4/9c/5f/d49c5ff1c35bac7b680c6655116d0bf1.jpg" alt="Bottom Wear">
+                </div>
+                <h3>Bottom Wear</h3>
+            </a>
+        </div>
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='men' subcategory='shoes' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/7b/3e/c5/7b3ec5b9693b5c0754c371c9efad8109.jpg" alt="Shoes">
+                </div>
+                <h3>Shoes</h3>
+            </a>
+        </div>
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='men' subcategory='accessories' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/e5/0c/60/e50c6068235d474df2659f3d19b4adc1.jpg" alt="Accessories">
+                </div>
+                <h3>Accessories</h3>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

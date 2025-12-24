@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="men-category">
+    <h1>Women's Fashion</h1>
+    <p>Explore premium styles curated for you</p>
+
+    <div class="subcategory-container">
+
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='women' subcategory='tops_w' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/da/ab/b4/daabb452cf14e45c9898a51c43465498.jpg" alt="Tshirts">
+                </div>
+                <h3>Tops & Dresses</h3>
+            </a>
+        </div>
+
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='women' subcategory='shirts_w' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/1200x/7e/17/74/7e1774db2fb8dbc2c92490702528d507.jpg" alt="Shirts">
+                </div>
+                <h3>Shirts</h3>
+            </a>
+        </div>
+
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='women' subcategory='bottom_w' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/5c/2a/45/5c2a45272d1416cf994090d8c1e60b12.jpg" alt="Bottom Wear">
+                </div>
+                <h3>Bottom Wear</h3>
+            </a>
+        </div>
+
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='women' subcategory='shoes_w' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/1200x/6f/d0/e3/6fd0e3d6e1a92f2216be3b1f59eb85a3.jpg" alt="Shoes">
+                </div>
+                <h3>Footwear</h3>
+            </a>
+        </div>
+
+        <div class="subcategory-card">
+            <a href="{% url 'subcategory_page' category='women' subcategory='accessories_w' %}">
+                <div class="img-wrapper">
+                    <img src="https://i.pinimg.com/736x/af/a6/6a/afa66a46ecbace1bb67a5b80fbe248d5.jpg" alt="Accessories">
+                </div>
+                <h3>Accessories</h3>
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

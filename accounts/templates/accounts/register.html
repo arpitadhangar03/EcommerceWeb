@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .reg-container {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(250, 250, 250, 0.1), rgba(243, 243, 243, 0.15));
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .reg-wrapper {
+        display: flex;
+        max-width: 950px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .reg-banner {
+        flex: 1;
+        background: url("https://i.pinimg.com/1200x/d4/8c/b0/d48cb07f09b0e33593c16b6b13d12e54.jpg") center/cover no-repeat;
+        min-height: 500px;
+        filter: brightness(0.85);
+    }
+
+    .reg-auth-container {
+        flex: 1;
+        padding: 30px 25px;
+        background: transparent;
+    }
+
+    .reg-header {
+        text-align: center;
+        margin-bottom: 16px;
+    }
+
+    .reg-brand-heading {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #222;
+        font-family: "Poppins", sans-serif;
+        position: relative;
+        display: inline-block;
+    }
+
+    .reg-brand-heading__highlight {
+        color: #d4af37;
+    }
+
+    .reg-brand-heading::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #d4af37, #b79635);
+        border-radius: 50%;
+    }
+
+    .reg-tagline {
+        font-size: 0.95rem;
+        color: #555;
+        margin-top: 8px;
+        font-style: italic;
+        letter-spacing: 0.4px;
+    }
+
+    .reg-form-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .reg-form-half,
+    .reg-form-third {
+        flex: 1;
+    }
+
+    .reg-label {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+        display: block;
+        font-weight: 500;
+        color: #444;
+    }
+
+    .reg-form-control {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(212, 175, 55, 0.7);
+        border-radius: 6px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.7);
+        transition: 0.3s;
+        backdrop-filter: blur(6px);
+        color: #222;
+    }
+
+    .reg-form-control:focus {
+        border-color: #d4af37;
+        background: rgba(255, 255, 255, 0.9);
+        outline: none;
+        color: #111;
+    }
+
+    textarea.reg-form-control {
+        height: 36px !important;
+        resize: none;
+    }
+
+    .reg-btn-register {
+        background: linear-gradient(135deg, #d4af37, #b79635);
+        border: none;
+        border-radius: 8px;
+        padding: 10px 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        margin: 12px auto 0;
+        transition: 0.3s;
+        box-shadow: 0 3px 10px rgba(212, 175, 55, 0.6);
+    }
+
+    .reg-btn-register:hover {
+        background: linear-gradient(135deg, #b79635, #d4af37);
+        transform: translateY(-2px);
+    }
+
+    .reg-login-link {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .reg-login-link a {
+        color: #d4af37;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .reg-login-link a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+        .reg-wrapper {
+            flex-direction: column;
+        }
+        .reg-banner {
+            height: 200px;
+        }
+    }
+
+    /* Style for error messages */
+    .alert-dismissible {
+        margin-bottom: 1rem;
+        color: #722;
+        background-color: #fce4e4;
+        border-color: #f5c2c7;
+        border-radius: 6px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="reg-container">
+    <div class="reg-wrapper">
+        <div class="reg-banner"></div>
+        <div class="reg-auth-container">
+            <div class="reg-header">
+                <h2 class="reg-brand-heading">Welcome to <span class="reg-brand-heading__highlight">StyleSphere</span></h2>
+                <p class="reg-tagline">Step into style. Shop premium fashion with us.</p>
+            </div>
+
+            {% if messages %}
+            <div class="messages mb-2">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="reg-form-row">
+                    <div class="reg-form-half">
+                        <label for="id_username" class="reg-label">Username</label>
+                        <input type="text" name="username" class="reg-form-control" id="id_username" required>
+                    </div>
+                    <div class="reg-form-half">
+                        <label for="id_email" class="reg-label">Email</label>
+                        <input type="email" name="email" class="reg-form-control" id="id_email" required>
+                    </div>
+                </div>
+
+                <div class="reg-form-row">
+                    <div class="reg-form-half">
+                        <label for="id_password1" class="reg-label">Password</label>
+                        <input type="password" name="password1" class="reg-form-control" id="id_password1" required>
+                        <small id="passwordWarning" class="text-danger"></small>
+                    </div>
+                    <div class="reg-form-half">
+                        <label for="id_password2" class="reg-label">Confirm Password</label>
+                        <input type="password" name="password2" class="reg-form-control" id="id_password2" required>
+                    </div>
+                </div>
+
+                <div class="reg-form-row">
+                    <div class="reg-form-half">
+                        <label for="id_phone" class="reg-label">Phone Number</label>
+                        <input type="text" name="phone" class="reg-form-control" id="id_phone" required>
+                    </div>
+                    <div class="reg-form-half">
+                        <label for="id_address" class="reg-label">Address</label>
+                        <textarea name="address" class="reg-form-control" id="id_address" required></textarea>
+                    </div>
+                </div>
+
+                <div class="reg-form-row">
+                    <div class="reg-form-third">
+                        <label for="id_city" class="reg-label">City</label>
+                        <input type="text" name="city" class="reg-form-control" id="id_city" required>
+                    </div>
+                    <div class="reg-form-third">
+                        <label for="id_state" class="reg-label">State</label>
+                        <input type="text" name="state" class="reg-form-control" id="id_state" required>
+                    </div>
+                    <div class="reg-form-third">
+                        <label for="id_zipcode" class="reg-label">Zip</label>
+                        <input type="text" name="zipcode" class="reg-form-control" id="id_zipcode" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="reg-btn-register">Register</button>
+            </form>
+
+            <div class="reg-login-link">
+                <p>Already have an account? <a href="{% url 'accounts:login' %}">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const passwordInput = document.getElementById('id_password1');
+    const warning = document.getElementById('passwordWarning');
+    if (passwordInput && warning) {
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+            let messages = [];
+            if (value.length < 8) messages.push("8 chars");
+            if (!/[A-Z]/.test(value)) messages.push("1 uppercase");
+            if (!/[0-9]/.test(value)) messages.push("1 number");
+            if (!/[!@#$%^&*(),.?\":{}|<>]/.test(value)) messages.push("1 special");
+            warning.innerText = messages.length > 0 ? "Password: " + messages.join(', ') : "";
+        });
+    }
+});
+</script>
+{% endblock %}

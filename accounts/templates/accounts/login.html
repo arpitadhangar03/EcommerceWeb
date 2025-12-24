@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .login-page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        position: relative;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+        padding: 20px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 420px;
+        padding: 25px 28px; /* Further reduced */
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 
+            0 20px 60px rgba(0,0,0,0.1),
+            0 8px 25px rgba(0,0,0,0.06);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #d4af37, #b79635, #d4af37);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 18px; /* Further reduced */
+    }
+
+    .login-header h2 {
+        font-size: 1.9rem; /* Smaller */
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 4px; /* Minimal */
+        letter-spacing: -0.5px;
+    }
+
+    .login-header p {
+        font-size: 0.95rem; /* Smaller */
+        color: #6c757d;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .login-header p span {
+        color: #d4af37;
+        font-weight: 600;
+    }
+
+    .login-form-group {
+        margin-bottom: 16px; /* Further reduced */
+        position: relative;
+    }
+
+    .login-form-group label {
+        color: #495057;
+        font-weight: 500;
+        font-size: 0.9rem; /* Smaller */
+        margin-bottom: 4px; /* Minimal */
+        display: block;
+    }
+
+    .login-form-control {
+        width: 100%;
+        padding: 12px 16px; /* Further reduced */
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 0.95rem; /* Slightly smaller */
+        background: #fff;
+        color: #212529;
+        transition: all 0.3s ease;
+        height: 48px; /* Reduced */
+    }
+
+    .login-form-control::placeholder {
+        color: #adb5bd;
+    }
+
+    .login-form-control:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px; /* Reduced */
+        padding: 10px 0 6px 0; /* Minimal padding */
+        border-top: 1px solid #f1f3f4;
+    }
+
+    input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        accent-color: #d4af37;
+    }
+
+    .login-form-check-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, #d4af37 0%, #b79635 100%);
+        border: none;
+        border-radius: 12px;
+        padding: 14px 0; /* Reduced */
+        font-size: 1rem; /* Slightly smaller */
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        background: linear-gradient(135deg, #b79635 0%, #d4af37 100%);
+    }
+
+    .login-links {
+        text-align: center;
+        margin-top: 18px; /* Reduced */
+    }
+
+    .login-links p {
+        margin: 4px 0; /* Minimal */
+        font-size: 0.9rem;
+    }
+
+    .login-links a {
+        color: #d4af37;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .login-links a:hover {
+        color: #b79635;
+        text-decoration: underline;
+    }
+
+    /* Compact Alerts */
+    .alert {
+        border-radius: 12px;
+        border: none;
+        margin-bottom: 15px; /* Reduced */
+        font-weight: 500;
+        padding: 12px 16px; /* Compact */
+        font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .login-container {
+            margin: 8px;
+            padding: 22px 22px;
+        }
+        
+        .login-header h2 {
+            font-size: 1.7rem;
+        }
+    }
+</style>
+
+<div class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Login to <span>StyleSphere</span></p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Username/password incorrect. Try again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="login-form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="login-form-control" id="username" placeholder="Username" required>
+            </div>
+
+            <div class="login-form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="login-form-control" id="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="login-form-check-label" for="rememberMe">Remember me</label>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn-login">Sign In</button>
+            </div>
+        </form>
+
+        <div class="login-links">
+            <p><a href="#">Forgot password?</a></p>
+            <p>New? <a href="{% url 'accounts:register' %}">Create Account</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
