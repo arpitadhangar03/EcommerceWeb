@@ -68,18 +68,6 @@ FAQ = {
     "return status kaise check kare": "Account me login karke ya customer support se pooch sakte hain.",
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 def get_chatbot_response(user_input):
     user_input_lower = user_input.lower()
     questions = list(FAQ.keys())
