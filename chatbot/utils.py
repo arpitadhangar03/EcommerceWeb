@@ -78,16 +78,16 @@ def get_chatbot_response(user_input):
         return FAQ[matches[0]]
 
     # FAQ me na mile to DialoGPT se response banao
-    inputs = tokenizer(user_input + tokenizer.eos_token, return_tensors="pt", padding=True)
-    input_ids = inputs["input_ids"]
-    attention_mask = inputs["attention_mask"]
+    # inputs = tokenizer(user_input + tokenizer.eos_token, return_tensors="pt", padding=True)
+    # input_ids = inputs["input_ids"]
+    # attention_mask = inputs["attention_mask"]
 
-    chat_history_ids = model.generate(
-        input_ids,
-        attention_mask=attention_mask,
-        max_length=100,
-        pad_token_id=tokenizer.pad_token_id,
-    )
+    # chat_history_ids = model.generate(
+    #     input_ids,
+    #     attention_mask=attention_mask,
+    #     max_length=100,
+        # pad_token_id=tokenizer.pad_token_id,
+    # )
 
-    response = tokenizer.decode(chat_history_ids[:, input_ids.shape[-1]:][0], skip_special_tokens=True)
-    return response or "Mujhe maaf kijiye, main aapki baat samajh nahi paya."
+    # response = tokenizer.decode(chat_history_ids[:, input_ids.shape[-1]:][0], skip_special_tokens=True)
+    # return response or "Mujhe maaf kijiye, main aapki baat samajh nahi paya."
