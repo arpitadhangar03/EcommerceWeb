@@ -1,16 +1,16 @@
 # chatbot/utils.py
-from transformers import AutoModelForCausalLM, AutoTokenizer
+# from transformers import AutoModelForCausalLM, AutoTokenizer
 from difflib import get_close_matches
-import torch
+# import torch
 
-model_name = "microsoft/DialoGPT-small"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+# model_name = "microsoft/DialoGPT-small"
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Pad token set karo agar missing ho
-if tokenizer.pad_token is None:
-    tokenizer.pad_token = tokenizer.eos_token
+# if tokenizer.pad_token is None:
+#     tokenizer.pad_token = tokenizer.eos_token
 
-model = AutoModelForCausalLM.from_pretrained(model_name)
+# model = AutoModelForCausalLM.from_pretrained(model_name)
 
 # FAQ dictionary: sawal aur jawab
 FAQ = {
